@@ -19,16 +19,10 @@ public class Accumulator {
 	    Object ele = list.get(i);
 	/* 3.  Stumbling block 0
 	    Java protects a programmer against applying a method to elements in list when some elements of the list might omit support for a particular operation.
-
-	    if (ele instanceof String)
-		if (((String)ele).startsWith(prefix))
-		    result += ele + " ";
-	}
 	    This protection is implemented by the __Java compiler__. The following attempt to violate the restriction is expected to result in the error _method not found in the given type___.
 
 	    The following code violates the restriction:
               */
-            // [code that violates the restriction]
 	// if (ele.startsWith(prefix))
 	//     //the compiler checks the variable type of ele for the method
 	//     result += ele + " ";
@@ -96,7 +90,8 @@ startsWith() method is not found in Object class (ele's variable type)
 	    // 	result += ele + " ";
             /*
              predicted error message:
-	     the cast from Double to String is not applicable
+	     No startsWith method for Double 3.14
+	     Double cannot be cast to String
 
 	     actual error message:
 	     java.base/java.lang.Double cannot be cast to java.base/java.lang.String
@@ -131,8 +126,8 @@ startsWith() method is not found in Object class (ele's variable type)
 	List_inArraySlots newList = new List_inArraySlots();
 	for (int i = 0; i < list.size(); i++){
 	    Object ele = list.get(i);
-	    if (ele instanceof Double)
-		if (!(((Double)ele).isInfinite()))
+	    if (ele instanceof Double
+		&& !(((Double)ele).isInfinite()))
 		    newList.add(ele);
 	}
 	return newList;
